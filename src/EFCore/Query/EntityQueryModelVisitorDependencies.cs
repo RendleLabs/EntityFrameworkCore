@@ -437,5 +437,26 @@ namespace Microsoft.EntityFrameworkCore.Query
                 EntityMaterializerSource,
                 expressionPrinter,
                 QueryProcessor);
+
+        /// <summary>
+        ///     Clones this dependency parameter object with one service replaced.
+        /// </summary>
+        /// <param name="queryProcessor"> A replacement for the current dependency of this type. </param>
+        /// <returns> A new parameter object with the given service replaced. </returns>
+        public EntityQueryModelVisitorDependencies With([NotNull] IQueryProcessor queryProcessor)
+            => new EntityQueryModelVisitorDependencies(
+                QueryOptimizer,
+                NavigationRewritingExpressionVisitorFactory,
+                QuerySourceTracingExpressionVisitorFactory,
+                EntityResultFindingExpressionVisitorFactory,
+                TaskBlockingExpressionVisitor,
+                MemberAccessBindingExpressionVisitorFactory,
+                ProjectionExpressionVisitorFactory,
+                EntityQueryableExpressionVisitorFactory,
+                QueryAnnotationExtractor,
+                ResultOperatorHandler,
+                EntityMaterializerSource,
+                ExpressionPrinter,
+                queryProcessor);
     }
 }
